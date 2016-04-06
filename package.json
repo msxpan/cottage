@@ -1,0 +1,16 @@
+{
+  "name": "little-cottage",
+  "version": "1.0.2",
+  "description": "a file structure generator",
+  "main": "cottage.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin":{"cottage":"cottage.js"},
+  "author": "msx_pan",
+  "license": "ISC",
+  "devDependencies": {
+    "async": "^1.5.2",
+    "commander": "^2.9.0"
+  }
+}
