@@ -1,3 +1,5 @@
+#! /usr/bin/env node
+
 var fs = require('fs');
 var async = require('async');
 var path = require('path');
@@ -48,7 +50,11 @@ var creatHtml=function(env,folder,type){
           throw err;
       }
 
-      var data = '<!DOCTYPE html>\n' +
+      var buf = new Buffer(8);
+      var data;
+
+      if (type=="html") {
+        data = '<!DOCTYPE html>\n' +
           '<html>\n\n' +
           '<head>\n' +
           '\t<meta charset="UTF-8">\n' +
@@ -61,8 +67,10 @@ var creatHtml=function(env,folder,type){
           '</body>\n\n' +
           '<script type="text/javascript" src="../resource/js/'+env+'.js"></script>\n' +
           '</html>\n';
+      }else{
+        data = ''
+      }
 
-      var buf = new Buffer(8);
       fs.write(fd, data, 0, 8, 0, function(err, bytesWritten, buffer) {
           if (err) {
               throw err;
