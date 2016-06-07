@@ -1,12 +1,15 @@
 {
   "name": "little-cottage",
-  "version": "1.0.6",
+  "version": "1.1.9",
   "description": "a file structure generator",
   "main": "cottage.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "bin":{"cottage":"cottage.js"},
+  "bin":{
+    "cottage":"cottage.js",
+    "cottage-resource":"cottage-resource.js"
+  },
   "author": "msx_pan",
   "license": "ISC",
   "dependencies": {

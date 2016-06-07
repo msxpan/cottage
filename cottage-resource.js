@@ -5,6 +5,7 @@ var async = require('async');
 var path = require('path');
 var program = require('commander');
 
+
 var createDirsSync = function (dir, split, mode, callback) {
     console.log("创建目录：" + dir);
     if (!fs.existsSync(dir)) {
@@ -40,9 +41,9 @@ var creatHtml=function(env,folder,type){
   if (type=="html") {
     filePath=env + '/src/' + folder + env +'.html';
   }else if(type=="css"){
-    filePath=env + '/src/images/' + env + '.css';
+    filePath=env + '/src/resource/css/' + env + '.css';
   }else if(type=="js"){
-    filePath=env + '/src/images/' + env + '.js';
+    filePath=env + '/src/resource/js/' + env + '.js';
   }else if(type=="png"){
     filePath=env + '/src/images/' + env + '.png';
   }
@@ -63,11 +64,11 @@ var creatHtml=function(env,folder,type){
           '\t<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">\n' +
           '\t<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">\n' +
           '\t<title></title>\n' +
-          '\t<link rel="stylesheet" type="text/css" href="images/'+env+'.css">\n' +
+          '\t<link rel="stylesheet" type="text/css" href="../resource/css/'+env+'.css">\n' +
           '</head>\n\n' +
           '<body>\n' +
           '</body>\n\n' +
-          '<script type="text/javascript" src="images/'+env+'.js"></script>\n' +
+          '<script type="text/javascript" src="../resource/js/'+env+'.js"></script>\n' +
           '</html>\n';
       }else{
         data = ''
@@ -149,24 +150,29 @@ var exists = function( src, dst, callback ){
 };
 
 
+
 program
 .version('0.0.1')
 .command('*')
 .action(function(env){
-  var gulpConfigPath = process.mainModule.paths[0].substr(0,process.mainModule.paths[0].length-12)+'/gulpConfig/cottage'
-  // console.log(env)
-  createDirsSync(env+'/static','/')
-  createDirsSync(env+'/images','/')
-  createDirsSync(env+'/template','/')
+
+  var gulpConfigPath = process.mainModule.paths[0].substr(0,process.mainModule.paths[0].length-12)+'/gulpConfig/resource'
+  createDirsSync(env+'/src/static','/')
+  createDirsSync(env+'/src/resource','/')
+  createDirsSync(env+'/src/wcm','/')
+  
+  createDirsSync(env+'/src/resource/js','/')
+  createDirsSync(env+'/src/resource/css','/')
+  createDirsSync(env+'/src/resource/images','/')
 
   exists(gulpConfigPath, env+'/', copy );
 
-  // creatHtml(env,'static','html')
-  // creatHtml(env,'wcm/','html')
-  // creatHtml(env,'','html')
-  // creatHtml(env,'','js')
-  // creatHtml(env,'','css')
-  // creatHtml(env,'','png')
+  creatHtml(env,'static','html')
+  creatHtml(env,'wcm','html')
+  creatHtml(env,'','js')
+  creatHtml(env,'','css')
+  creatHtml(env,'','png')
+  
 });
 
 program.parse(process.argv);

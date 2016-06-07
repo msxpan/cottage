@@ -1,0 +1,15 @@
+{
+  "serverPort":"3001",
+  "dev_template":{
+    "env": "测试",
+  },
+  "pro_template":{
+    "env": "生产",
+  },
+  "debug_template":{
+  	"env": "调试",
+  	"ROOT_PATH":"../public/"
+  },
+  "testSiteId":"122",
+  "proSiteId":"122"
+}
